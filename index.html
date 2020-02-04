@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>index</title>
+	<!-- leaflet css lib. must go here! -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>	 
+     <!-- leaflet js lib. must go here! -->
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+
+    <!-- leaflet grouped layer control -->
+    <script src="scripts/leaflet.groupedlayercontrol.js"></script>
+
+
+     <!-- esri basemap compatibility -->
+     <script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
+  integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
+  crossorigin=""></script>
+
+      <!-- AJAX: https://github.com/calvinmetcalf/leaflet-ajax -->
+    <script type="text/javascript" src="scripts/leaflet.ajax.js"></script>
+
+  	<!-- my specified css styles -->
+  	<link rel="stylesheet" type="text/css" href="scripts/styles.css">
+
+
+</head>
+<body>
+	<!-- the location of the map on the page -->
+	<div id="map"></div>
+
+	<!-- call custom leaflet and javascript functions -->
+	<script src="scripts/main.js"></script>
+</body>
+</html>
