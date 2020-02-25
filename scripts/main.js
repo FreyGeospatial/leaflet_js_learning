@@ -26,46 +26,81 @@ var image_mosaic = L.tileLayer.wms("http://localhost:8080/geoserver/learn_js/wms
 	opacity: 1
 });
 
+//create geojson layer group
+var geojson_layergroup = L.layerGroup();
+
+
 //geojson files - set up another localhost to serve geojson files, and set cross origin header appropriately
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539806_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539807_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539808_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539809_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539810_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539826_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539827_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539828_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539829_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539830_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539846_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539847_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539848_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539849_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539850_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539866_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539867_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539868_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539869_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539870_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539886_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539887_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539888_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539889_736815_736967_seg.geojson").addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539890_736815_736967_seg.geojson").addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539806_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539807_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539808_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539809_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539810_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539826_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539827_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539828_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539829_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539830_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539846_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539847_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539848_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539849_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539850_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539866_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539867_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539868_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539869_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539870_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539886_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539887_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539888_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539889_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539890_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
 
 
-/*
-var tile539806_736815_736967_seg = new L.GeoJSON.AJAX("scripts/geojson/Segments/tile539806_736815_736967_seg.geojson",{
-	style: {
-		fillColor: "#cc0000",
-		weight: 1,
-		color: "red",
-		dashArray: "1",
-		fillOpacity: 0
-	}
-}).addTo(geojson_layergroup);
-*/
+/* ----------------------------add geojson highlighting, popups, etc--------------------------------------- */
+function defaultStyle() {
+    return {
+        fillColor: "#cc0000",
+        weight: 1,
+        opacity: 1,
+        color: 'blue',
+        dashArray: '1',
+        fillOpacity: 00
+    };
+}
 
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
+}
+
+function highlightFeature(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+          weight: 5,
+          color: '#666',
+          dashArray: '',
+          fillOpacity: 0.7
+      });
+  };
+
+function resetHighlight(e) {
+	e.target.setStyle(defaultStyle())
+}
+var highlight = {
+    'color': '#333333',
+    'weight': 2,
+    'opacity': 1
+};
+ 
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
 /**** add vars to map ****/
 esri.addTo(map);
 image_mosaic.addTo(map);
