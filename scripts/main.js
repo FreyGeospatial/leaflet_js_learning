@@ -1,7 +1,7 @@
 /***** set variables *****/
 var map = L.map('map', {
-	center: [9.5, -1.51], //on load, center map here
-	zoom: 12,
+	center: [9.0, -1.2], //on load, center map here
+	zoom: 10,
 	//layers: [] //layer groups here
 });
 
@@ -18,44 +18,27 @@ var overlays = {
 */
 
 //geotiff mosaic served as wms from geoserver
-var image_mosaic = L.tileLayer.wms("http://localhost:8080/geoserver/learn_js/wms",{
+var image_mosaic_GS = L.tileLayer.wms("http://localhost:8080/geoserver/learn_js/wms",{
 	layers: 'learnjs:GS',
 	format: 'image/png',
 	zIndex: 2, //superimpose over basemap
 	transparent: true, //eliminate null value background layer
 	opacity: 1
 });
+var image_mosaic_OS = L.tileLayer.wms("http://localhost:8080/geoserver/learn_js/wms",{
+	layers: 'learnjs:OS',
+	format: 'image/png',
+	zIndex: 2, //superimpose over basemap
+	transparent: true, //eliminate null value background layer
+	opacity: 1
+});
+
 
 //create geojson layer group
 var geojson_layergroup = L.layerGroup();
 
-
-//geojson files - set up another localhost to serve geojson files, and set cross origin header appropriately
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539806_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539807_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539808_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539809_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539810_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539826_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539827_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539828_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539829_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539830_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539846_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539847_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539848_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539849_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539850_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539866_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539867_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539868_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539869_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539870_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539886_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539887_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539888_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539889_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
-var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/tile539890_736815_736967_seg.geojson", {style: defaultStyle, onEachFeature: onEachFeature}).addTo(map);
+//load in geojson features
+var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/aoi5_boundarymerge_reid.geojson", {style: defaultStyle, onEachFeature: onEachFeature})
 
 
 /* ----------------------------add geojson highlighting, popups, etc--------------------------------------- */
@@ -74,7 +57,7 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        click: highlightFeature
     });
 }
 
@@ -89,6 +72,7 @@ function highlightFeature(e) {
       });
   };
 
+
 function resetHighlight(e) {
 	e.target.setStyle(defaultStyle())
 }
@@ -99,8 +83,11 @@ var highlight = {
 };
  
 function zoomToFeature(e) {
+
     map.fitBounds(e.target.getBounds());
 }
 /**** add vars to map ****/
 esri.addTo(map);
-image_mosaic.addTo(map);
+image_mosaic_OS.addTo(map);
+image_mosaic_GS.addTo(map);
+geojsonFeature.addTo(map);
