@@ -39,9 +39,13 @@ var geojson_layergroup = L.layerGroup();
 
 //load in geojson features
 var geojsonFeature = new L.GeoJSON.AJAX("http://127.0.0.1:8003/aoi5_boundarymerge_reid.geojson", {style: defaultStyle, onEachFeature: onEachFeature})
-
-
+//var tileIndex = geojsonvt("aoi5_boundarymerge_reid.geojson");
+//var tile = tileIndex.getTile(z, x, y).features;
+//console.log(tileIndex.tileCoords);
 /* ----------------------------add geojson highlighting, popups, etc--------------------------------------- */
+
+var selected = [];
+
 function defaultStyle() {
     return {
         fillColor: "#cc0000",
@@ -54,16 +58,17 @@ function defaultStyle() {
 }
 
 function onEachFeature(feature, layer) {
+  // console.log("feature: ", feature);
+  // console.log("layer: ", layer);
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: highlightFeature
+        click: myfunction
     });
 }
 
 function highlightFeature(e) {
       var layer = e.target;
-
       layer.setStyle({
           weight: 5,
           color: '#666',
@@ -74,18 +79,22 @@ function highlightFeature(e) {
 
 
 function resetHighlight(e) {
-	e.target.setStyle(defaultStyle())
+  if (selected.includes(e.target.feature.properties["id"])) {
+  }else{
+        e.target.setStyle(defaultStyle());
+  }
 }
-var highlight = {
-    'color': '#333333',
-    'weight': 2,
-    'opacity': 1
-};
- 
-function zoomToFeature(e) {
 
-    map.fitBounds(e.target.getBounds());
+
+function myfunction(e){
+  console.log(e.target.feature.properties["id"]);
+  if (selected.includes(e.target.feature.properties["id"])) {
+    selected.pop(e.target.feature.properties["id"]);
+  }else{
+    selected.push(e.target.feature.properties["id"]); //add feature id to list
+  }
 }
+
 /**** add vars to map ****/
 esri.addTo(map);
 image_mosaic_OS.addTo(map);
